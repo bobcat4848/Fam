@@ -1,0 +1,5 @@
+# This is the .gitignore file, all files within here will be ignored
+.idea/
+javafx-sdk-15.0.1/
+out/
+Fam.iml
