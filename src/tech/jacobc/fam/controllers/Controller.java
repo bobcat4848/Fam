@@ -6,6 +6,8 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,7 +65,7 @@ public class Controller implements Initializable {
         translateTransition.play();
 
         menu.setOnMouseClicked(event -> {
-
+            menu.setDisable(true);
             pane1.setVisible(true);
 
             FadeTransition fadeTransition1=new FadeTransition(Duration.seconds(0.5),pane1);
@@ -74,9 +76,15 @@ public class Controller implements Initializable {
             TranslateTransition translateTransition1=new TranslateTransition(Duration.seconds(0.5),pane2);
             translateTransition1.setByX(+600);
             translateTransition1.play();
+
+            new Timeline(new KeyFrame(
+                    Duration.millis(2500),
+                    ae -> menu.setDisable(false)))
+                    .play();
         });
 
         pane1.setOnMouseClicked(event -> {
+            pane1.setDisable(true);
             FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), pane1);
             fadeTransition1.setFromValue(0.15);
             fadeTransition1.setToValue(0);
@@ -90,6 +98,11 @@ public class Controller implements Initializable {
             TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), pane2);
             translateTransition1.setByX(-600);
             translateTransition1.play();
+
+            new Timeline(new KeyFrame(
+                    Duration.millis(2500),
+                    ae -> pane1.setDisable(false)))
+                    .play();
         });
     }
 
