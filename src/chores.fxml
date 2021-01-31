@@ -122,7 +122,17 @@
                   </ImageView>
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+                        <Image url="@images/Family.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
                         <Image url="@images/list_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/grocery.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -133,11 +143,6 @@
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/reward.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/grocery.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -158,7 +163,17 @@
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onFamilyButtonPressed" onTouchReleased="#onFamilyButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Family" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
                   <JFXButton alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="179.0" text="Chore List" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onGroceryButtonPressed" onTouchReleased="#onGroceryButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Grocery" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>
@@ -169,11 +184,6 @@
                      </font>
                   </JFXButton>
                   <JFXButton alignment="BASELINE_LEFT" onAction="#onRewardButtonPressed" onTouchReleased="#onRewardButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Reward" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="20.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" onAction="#onGroceryButtonPressed" onTouchReleased="#onGroceryButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Grocery" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>

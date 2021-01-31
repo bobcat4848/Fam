@@ -1,13 +1,7 @@
 package tech.jacobc.fam.controllers;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.Firestore;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXProgressBar;
-import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,9 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,37 +25,27 @@ import tech.jacobc.fam.FamilyMember;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static tech.jacobc.fam.Main.chores;
 import static tech.jacobc.fam.Main.family;
 
-public class ChoresController implements Initializable {
+public class FamilyController implements Initializable {
 
     @FXML private ImageView exit, menu;
     @FXML private AnchorPane pane1;
     @FXML private AnchorPane pane2;
     @FXML private Label timeText;
-    @FXML private JFXComboBox personComboBox;
-    @FXML private JFXComboBox frequencyComboBox;
-    @FXML private TableView<Chore> choreListNotDone;
-    @FXML private ListView choreListDone;
-    @FXML private TableColumn choreColumn;
-    @FXML private TableColumn frequencyColumn;
+    @FXML private TableView<FamilyMember> familyTable;
+    @FXML private TableColumn nameColumn;
     @FXML private TableColumn pointsColumn;
-    @FXML private JFXSlider pointBar;
+    @FXML private JFXTextField nameTextField;
 
-    private ObservableList<Chore> data;
+    private ObservableList<FamilyMember> data;
 
-    private String selectedToDoChore = "";
-    private long selectedToDoChorePoints = 0;
-
-    private Chore currentlySelectedChore;
-
-    private Firestore db;
+    private String name = "";
+    private boolean isCapital = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,11 +57,10 @@ public class ChoresController implements Initializable {
         });
 
         // chore table stuff
-        data = FXCollections.observableArrayList(chores);
-        choreColumn.setCellValueFactory(new PropertyValueFactory("name"));
-        frequencyColumn.setCellValueFactory(new PropertyValueFactory("frequency"));
-        pointsColumn.setCellValueFactory(new PropertyValueFactory("points"));
-        choreListNotDone.setItems(data);
+        data = FXCollections.observableArrayList(family);
+        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        pointsColumn.setCellValueFactory(new PropertyValueFactory("totalPoints"));
+        familyTable.setItems(data);
         // end of chore table stuff
 
         pane1.setVisible(false);
@@ -134,11 +115,6 @@ public class ChoresController implements Initializable {
                     .play();
         });
 
-        personComboBox.setItems(populatePersonComboBox());
-        frequencyComboBox.setItems(populateFrequencyComboBox());
-
-        choreListDone.setItems(populateChoreListDone());
-
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(60), event -> {
             timeText.setText(formatDate.format(new Date()));
         }));
@@ -146,94 +122,62 @@ public class ChoresController implements Initializable {
         timeline.play();
     }
 
-    @FXML
-    private void choreStore() {
-        currentlySelectedChore = choreListNotDone.getSelectionModel().selectedItemProperty().get();
+    private void addKey(String c) {
+        if (isCapital) name += c.toUpperCase();
+        else name += c.toLowerCase();
+        nameTextField.setText(name);
     }
 
-    @FXML
-    private void storeChore() {
-        selectedToDoChore = (String) choreListDone.getSelectionModel().getSelectedItem();
+    @FXML private void addToFamily() {
+        if (!name.trim().equals("")) {
+            family.add(new FamilyMember(name, 0));
+            name = "";
+            nameTextField.setText(name);
+        }
+        update();
     }
 
-    @FXML
-    private void storePoints() {
-        selectedToDoChorePoints = (long) pointBar.getValue();
-        System.out.println(selectedToDoChorePoints);
-    }
-
-    // This method should only be called if a new website has been added and the table must be updated
     private void update() {
-        data = FXCollections.observableArrayList(chores);
-        choreListNotDone.setItems(data);
+        data = FXCollections.observableArrayList(family);
+        familyTable.setItems(data);
     }
 
-    private ObservableList<String> populatePersonComboBox() {
-        List<String> people = new ArrayList<>();
-        for (FamilyMember member : family) {
-            people.add(member.getName());
-        }
-        return FXCollections.observableArrayList(people);
+    @FXML private void capitalPress() { isCapital = !(isCapital); }
+    @FXML private void delPress() {
+        name = name.substring(0, name.length() - 1);
+        nameTextField.setText(name);
     }
-
-    private ObservableList<String> populateFrequencyComboBox() {
-        return FXCollections.observableArrayList(
-                "Daily",
-                "Weekly",
-                "Bi-Weekly",
-                "Monthly"
-        );
-    }
-
-    private ObservableList<String> populateChoreListDone() {
-        return FXCollections.observableArrayList(
-                "Do the Garbage",
-                "Do the Dishes",
-                "Mow the lawn",
-                "Dust the house",
-                "Clean room",
-                "Wash car",
-                "Do the laundry",
-                "Mop",
-                "Wash Dogs",
-                "Clean cat litter",
-                "Make bed",
-                "Clean tub",
-                "Clean toilet",
-                "Weed the garden"
-        );
-    }
-
-    @FXML
-    private void createChoreButtonPressed(ActionEvent event) throws IOException {
-        chores.add(new Chore(selectedToDoChore, frequencyComboBox.getValue().toString(), selectedToDoChorePoints));
-        update();
-    }
-
-    @FXML
-    private void markChoreDoneButton(ActionEvent event) {
-        chores.remove(currentlySelectedChore);
-        String familyMemberName = personComboBox.getValue().toString();
-        for (int i = 0; i < family.size(); i++) {
-            if (family.get(i).getName().equalsIgnoreCase(familyMemberName)) {
-                family.get(i).setTotalPoints(family.get(i).getTotalPoints() + currentlySelectedChore.getPoints());
-            }
-        }
-        update();
-    }
+    @FXML private void qPress() { addKey("q"); }
+    @FXML private void wPress() { addKey("w"); }
+    @FXML private void ePress() { addKey("e"); }
+    @FXML private void rPress() { addKey("r"); }
+    @FXML private void tPress() { addKey("t"); }
+    @FXML private void yPress() { addKey("y"); }
+    @FXML private void uPress() { addKey("u"); }
+    @FXML private void iPress() { addKey("i"); }
+    @FXML private void oPress() { addKey("o"); }
+    @FXML private void pPress() { addKey("p"); }
+    @FXML private void aPress() { addKey("a"); }
+    @FXML private void sPress() { addKey("s"); }
+    @FXML private void dPress() { addKey("d"); }
+    @FXML private void fPress() { addKey("f"); }
+    @FXML private void gPress() { addKey("g"); }
+    @FXML private void hPress() { addKey("h"); }
+    @FXML private void jPress() { addKey("j"); }
+    @FXML private void kPress() { addKey("k"); }
+    @FXML private void lPress() { addKey("l"); }
+    @FXML private void zPress() { addKey("z"); }
+    @FXML private void xPress() { addKey("x"); }
+    @FXML private void cPress() { addKey("c"); }
+    @FXML private void vPress() { addKey("v"); }
+    @FXML private void bPress() { addKey("b"); }
+    @FXML private void nPress() { addKey("n"); }
+    @FXML private void mPress() { addKey("m"); }
+    @FXML private void spacePress() { addKey(" "); }
 
     @FXML
     private void onHomeButtonPressed(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../track.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-    }
-
-    @FXML
-    private void onFamilyButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../family.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);

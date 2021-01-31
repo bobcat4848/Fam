@@ -58,6 +58,11 @@
                   </ImageView>
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+                        <Image url="@images/Family.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
                         <Image url="@images/list_1.png" />
                      </image>
                   </ImageView>
@@ -76,11 +81,6 @@
                         <Image url="@images/grocery.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/calendar.png" />
-                     </image>
-                  </ImageView>
                </children>
             </VBox>
          </children>
@@ -93,6 +93,11 @@
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/home3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Family.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -129,6 +134,11 @@
             <VBox layoutX="1.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="20.0">
                <children>
                   <JFXButton alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="179.0" text="Home" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onFamilyButtonPressed" onTouchReleased="#onFamilyButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Family" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>

@@ -161,8 +161,17 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    private void onFamilyButtonPressed(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../family.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+    @FXML
     private void onNotificationButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../reminders.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../reminders.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -171,7 +180,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void onRewardButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../rewards.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../rewards.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -180,7 +189,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void onGroceryButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../grocery.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../grocery.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -189,13 +198,10 @@ public class Controller implements Initializable {
 
     @FXML
     private void onCalendarButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../calendar.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../calendar.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }
-
-
-
 }

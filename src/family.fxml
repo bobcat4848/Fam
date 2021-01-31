@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.jacobc.fam.controllers.FamilyController">
+   <children>
+      <AnchorPane layoutX="74.0" layoutY="60.0" prefHeight="424.0" prefWidth="712.0">
+         <children>
+            <Text layoutX="223.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family" textAlignment="CENTER" wrappingWidth="266.8349609375" AnchorPane.topAnchor="-3.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="46.0" />
+               </font>
+            </Text>
+            <JFXButton layoutX="335.0" layoutY="189.0" onAction="#qPress" onTouchReleased="#qPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="Q" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="373.0" layoutY="189.0" onAction="#wPress" onTouchReleased="#wPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="W" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="415.0" layoutY="189.0" onAction="#ePress" onTouchReleased="#ePress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="E" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="452.0" layoutY="189.0" onAction="#rPress" onTouchReleased="#rPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="R" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="490.0" layoutY="189.0" onAction="#tPress" onTouchReleased="#tPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="T" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="526.0" layoutY="189.0" onAction="#yPress" onTouchReleased="#yPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="Y" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="562.0" layoutY="189.0" onAction="#uPress" onTouchReleased="#uPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="U" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="600.0" layoutY="189.0" onAction="#iPress" onTouchReleased="#iPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="I" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="632.0" layoutY="189.0" onAction="#oPress" onTouchReleased="#oPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="O" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="670.0" layoutY="189.0" onAction="#pPress" onTouchReleased="#pPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="P" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="358.0" layoutY="235.0" onAction="#aPress" onTouchReleased="#aPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="A" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="396.0" layoutY="235.0" onAction="#sPress" onTouchReleased="#sPress" prefHeight="46.0" prefWidth="42.0" style="-fx-background-color: #ff884b;" text="S" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="438.0" layoutY="235.0" onAction="#dPress" onTouchReleased="#dPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="D" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="475.0" layoutY="235.0" onAction="#fPress" onTouchReleased="#fPress" prefHeight="46.0" prefWidth="38.0" style="-fx-background-color: #ff884b;" text="F" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="513.0" layoutY="235.0" onAction="#gPress" onTouchReleased="#gPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="G" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="549.0" layoutY="235.0" onAction="#hPress" onTouchReleased="#hPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="H" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="585.0" layoutY="235.0" onAction="#jPress" onTouchReleased="#jPress" prefHeight="46.0" prefWidth="38.0" style="-fx-background-color: #ff884b;" text="J" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="623.0" layoutY="235.0" onAction="#kPress" onTouchReleased="#kPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="K" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="655.0" layoutY="235.0" onAction="#lPress" onTouchReleased="#lPress" prefHeight="46.0" prefWidth="38.0" style="-fx-background-color: #ff884b;" text="L" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="357.0" layoutY="281.0" onAction="#zPress" onTouchReleased="#zPress" prefHeight="46.0" prefWidth="42.0" style="-fx-background-color: #ff884b;" text="Z" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="395.0" layoutY="281.0" onAction="#xPress" onTouchReleased="#xPress" prefHeight="46.0" prefWidth="42.0" style="-fx-background-color: #ff884b;" text="X" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="437.0" layoutY="281.0" onAction="#cPress" onTouchReleased="#cPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="C" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="474.0" layoutY="281.0" onAction="#vPress" onTouchReleased="#vPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="V" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="511.0" layoutY="281.0" onAction="#bPress" onTouchReleased="#bPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="B" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="622.0" layoutY="281.0" onAction="#delPress" onTouchReleased="#delPress" prefHeight="46.0" prefWidth="71.0" style="-fx-background-color: #ff884b;" text="DEL" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="484.0" layoutY="327.0" onAction="#spacePress" onTouchReleased="#spacePress" prefHeight="46.0" prefWidth="96.0" style="-fx-background-color: #ff884b;" text="Space" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="546.0" layoutY="281.0" onAction="#nPress" onTouchReleased="#nPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="N" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="583.0" layoutY="281.0" onAction="#mPress" onTouchReleased="#mPress" prefHeight="46.0" prefWidth="32.0" style="-fx-background-color: #ff884b;" text="M" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="649.0" layoutY="327.0" onAction="#capitalPress" onTouchReleased="#capitalPress" prefHeight="46.0" prefWidth="42.0" style="-fx-background-color: #ff884b;" text="↑" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXTextField fx:id="nameTextField" alignment="CENTER" layoutX="418.0" layoutY="93.0" prefHeight="26.0" prefWidth="227.0" promptText="Name">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton layoutX="451.0" layoutY="142.0" onAction="#addToFamily" onTouchReleased="#addToFamily" style="-fx-background-color: #d2fffc;" text="Add to Family Roster" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <TableView fx:id="familyTable" layoutX="50.0" layoutY="89.0" prefHeight="315.0" prefWidth="267.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="182.40000915527344" text="Name" />
+                <TableColumn fx:id="pointsColumn" minWidth="0.0" prefWidth="84.0" text="Total Points" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: ff577f;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fx:id="exit" fitHeight="25.0" fitWidth="25.0" layoutX="767.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Equis.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="menu" fitHeight="46.0" fitWidth="32.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/burger.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="117.0" layoutX="45.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/fam_2.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="timeText" layoutX="596.0" layoutY="3.0" prefHeight="40.0" prefWidth="141.0" text="Sat Jan 30 16:29:32 CST 2021" textAlignment="CENTER" textFill="#d2fffc" wrapText="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="46.0" prefHeight="455.0" prefWidth="44.0" style="-fx-background-color: #92CCC8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="44.0" spacing="13.0" AnchorPane.topAnchor="25.0">
+               <children>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/homewhite.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/list_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/notification.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/reward.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/grocery.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/calendar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="455.0" prefWidth="44.0" style="-fx-background-color: #92CCC8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="44.0" spacing="13.0" AnchorPane.topAnchor="25.0">
+               <children>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/home3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Family.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/list_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/grocery.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/notification.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/reward.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/calendar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane2" layoutX="43.0" layoutY="46.0" prefHeight="455.0" prefWidth="178.0" style="-fx-background-color: ff884b;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0">
+         <children>
+            <VBox layoutX="1.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onHomeButtonPressed" onTouchReleased="#onHomeButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Home" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="179.0" text="Family" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="179.0" text="Chore List" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onGroceryButtonPressed" onTouchReleased="#onGroceryButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Grocery" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onNotificationButtonPressed" onTouchReleased="#onNotificationButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Notifications" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onRewardButtonPressed" onTouchReleased="#onRewardButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Reward" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onCalendarButtonPressed" onTouchReleased="#onCalendarButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Calendar" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
