@@ -2,11 +2,12 @@ package tech.jacobc.fam.controllers;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.firebase.cloud.FirestoreClient;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.JFXSlider;
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,15 +17,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.apache.commons.lang3.ObjectUtils;
+import tech.jacobc.fam.Chore;
 import tech.jacobc.fam.FamilyMember;
 
 import java.io.IOException;
@@ -34,30 +37,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 
+import static tech.jacobc.fam.Main.chores;
 import static tech.jacobc.fam.Main.family;
 
-public class Controller implements Initializable {
+public class ChoresController implements Initializable {
 
-    @FXML
-    private ImageView exit, menu;
+    @FXML private ImageView exit, menu;
+    @FXML private AnchorPane pane1;
+    @FXML private AnchorPane pane2;
+    @FXML private Label timeText;
+    @FXML private JFXComboBox personComboBox;
+    @FXML private JFXComboBox frequencyComboBox;
+    @FXML private TableView<Chore> choreListNotDone;
+    @FXML private ListView choreListDone;
+    @FXML private TableColumn choreColumn;
+    @FXML private TableColumn frequencyColumn;
+    @FXML private TableColumn pointsColumn;
+    @FXML private JFXSlider pointBar;
 
-    @FXML
-    private AnchorPane pane1;
+    private ObservableList<Chore> data;
 
-    @FXML
-    private AnchorPane pane2;
+    private String selectedToDoChore = "";
+    private long selectedToDoChorePoints = 0;
 
-    @FXML
-    private PieChart pieChart;
-
-    @FXML
-    private BarChart barChart;
-
-    @FXML
-    private Label timeText;
-
+    private Chore currentlySelectedChore;
 
     private Firestore db;
 
@@ -70,8 +74,13 @@ public class Controller implements Initializable {
             System.exit(0);
         });
 
-        pieChart.setData(getPieChartData());
-        barChart.getData().add(getBarChartData());
+        // chore table stuff
+        data = FXCollections.observableArrayList(chores);
+        choreColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        frequencyColumn.setCellValueFactory(new PropertyValueFactory("frequency"));
+        pointsColumn.setCellValueFactory(new PropertyValueFactory("points"));
+        choreListNotDone.setItems(data);
+        // end of chore table stuff
 
         pane1.setVisible(false);
 
@@ -125,35 +134,99 @@ public class Controller implements Initializable {
                     .play();
         });
 
+        personComboBox.setItems(populatePersonComboBox());
+        frequencyComboBox.setItems(populateFrequencyComboBox());
+
+        choreListDone.setItems(populateChoreListDone());
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(60), event -> {
             timeText.setText(formatDate.format(new Date()));
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+
+
     }
-
-    private ObservableList<PieChart.Data> getPieChartData() {
-        List<PieChart.Data> familyMembers = new ArrayList<>();
-        for (FamilyMember member : family) {
-            familyMembers.add(new PieChart.Data(member.getName(), member.getTotalPoints()));
-        }
-        return FXCollections.observableArrayList(familyMembers);
-    }
-
-    private XYChart.Series getBarChartData() {
-        // some database stuff, get people in the family
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Total Points");
-        for (FamilyMember member : family) {
-            series1.getData().add(new XYChart.Data(member.getName(), member.getTotalPoints()));
-        }
-
-        return series1;
+    @FXML
+    private void choreStore() {
+        currentlySelectedChore = choreListNotDone.getSelectionModel().selectedItemProperty().get();
     }
 
     @FXML
-    private void onChoreListButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../chores.fxml"));
+    private void storeChore() {
+        selectedToDoChore = (String) choreListDone.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    private void storePoints() {
+        selectedToDoChorePoints = (long) pointBar.getValue();
+        System.out.println(selectedToDoChorePoints);
+    }
+
+    // This method should only be called if a new website has been added and the table must be updated
+    private void update() {
+        data = FXCollections.observableArrayList(chores);
+        choreListNotDone.setItems(data);
+    }
+
+    private ObservableList<String> populatePersonComboBox() {
+        List<String> people = new ArrayList<>();
+        for (FamilyMember member : family) {
+            people.add(member.getName());
+        }
+        return FXCollections.observableArrayList(people);
+    }
+
+    private ObservableList<String> populateFrequencyComboBox() {
+        return FXCollections.observableArrayList(
+                "Daily",
+                "Weekly",
+                "Bi-Weekly",
+                "Monthly"
+        );
+    }
+
+    private ObservableList<String> populateChoreListDone() {
+        return FXCollections.observableArrayList(
+                "Do the Garbage",
+                "Do the Dishes",
+                "Mow the lawn",
+                "Dust the house",
+                "Clean room",
+                "Wash car",
+                "Do the laundry",
+                "Mop",
+                "Wash Dogs",
+                "Clean cat litter",
+                "Make bed",
+                "Clean tub",
+                "Clean toilet",
+                "Weed the garden"
+        );
+    }
+
+    @FXML
+    private void createChoreButtonPressed(ActionEvent event) throws IOException {
+        chores.add(new Chore(selectedToDoChore, frequencyComboBox.getValue().toString(), selectedToDoChorePoints));
+        update();
+    }
+
+    @FXML
+    private void markChoreDoneButton(ActionEvent event) {
+        System.out.println("Before: " + chores);
+        chores.remove(currentlySelectedChore);
+        System.out.println("After: " + chores);
+        String familyMemberName = personComboBox.getValue().toString();
+        for (int i = 0; i < family.size(); i++) {
+            if (family.get(i).getName().equalsIgnoreCase(familyMemberName)) {
+                family.get(i).setTotalPoints(family.get(i).getTotalPoints() + currentlySelectedChore.getPoints());
+            }
+        }
+    }
+
+    @FXML
+    private void onHomeButtonPressed(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../track.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -162,7 +235,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void onNotificationButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../reminders.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../reminders.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -171,7 +244,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void onRewardButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../rewards.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../rewards.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -180,7 +253,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void onGroceryButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../grocery.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../grocery.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -189,13 +262,10 @@ public class Controller implements Initializable {
 
     @FXML
     private void onCalendarButtonPressed(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../calendar.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../../../../calendar.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }
-
-
-
 }

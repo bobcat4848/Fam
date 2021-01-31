@@ -1,17 +1,22 @@
 package tech.jacobc.fam;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Chore {
+public class Chore implements Serializable {
 
     private String ID;
     private static final String raspberryID = "A652M8";
 
     private String name;
     private String frequency;
-    private int points;
+    private long points;
 
-    public Chore(String name, String frequency, int points) {
+    public Chore() {
+        this("No Name", "Daily", 0L);
+    }
+
+    public Chore(String name, String frequency, long points) {
         this.ID = UUID.randomUUID().toString();
         this.name = name;
         this.frequency = frequency;
@@ -42,11 +47,15 @@ public class Chore {
         this.frequency = frequency;
     }
 
-    public int getPoints() {
+    public long getPoints() {
         return points;
     }
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public String toString() {
+        return name + " " + frequency +  " " + points;
     }
 }

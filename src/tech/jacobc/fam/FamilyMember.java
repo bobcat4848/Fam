@@ -10,12 +10,11 @@ public class FamilyMember {
     private String name;
     private String pushTokenId;
     private String familyName;
-    private int totalPoints;
+    private long totalPoints;
 
-    public FamilyMember(String name, String familyName, int totalPoints) {
+    public FamilyMember(String name, long totalPoints) {
         this.ID = UUID.randomUUID().toString();
         this.name = name;
-        this.familyName = familyName;
         this.totalPoints = totalPoints;
     }
 
@@ -35,11 +34,11 @@ public class FamilyMember {
         this.name = name;
     }
 
-    public int getTotalPoints() {
+    public long getTotalPoints() {
         return totalPoints;
     }
 
-    public void setTotalPoints(int totalPoints) {
+    public void setTotalPoints(long totalPoints) {
         this.totalPoints = totalPoints;
     }
 }
