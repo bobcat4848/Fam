@@ -304,7 +304,7 @@
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="179.0" text="Chore List" textFill="WHITE">
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#onChoreButtonPressed" onTouchReleased="#onChoreButtonPressed" prefHeight="40.0" prefWidth="179.0" text="Chore List" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>
