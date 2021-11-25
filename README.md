@@ -13,7 +13,7 @@ A hackathon winning-app based on the idea of being a family-helping device. Keep
 
 Think of your smart thermostat, it's typically at the front of the home close to the entrance. With this, it aims to be in a similar location on a touch-screen enabled device where 
 anyone in the family can interact with it. Parents can assign chores with a point value and then anyone in the family can do the chores. Once someone completes the chore, they have
-points added to their name and they can see it reflected in the graphs on the home page of the app. If for some reason someone does not want to interact with the device here,
+points added to their name and they can see it reflected in the graphs on the home page of the app. Additional information such as task reminders, grocery lists, and more are also an option. If for some reason someone does not want to interact with the device here,
 they can use the android application to access the same information. 
 
 ### Libraries Used
